@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/lib/auth-context";
+import { I18nProvider } from "@/lib/i18n";
 import AppLayout from "@/components/layout/AppLayout";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
@@ -14,6 +15,9 @@ import EquipmentPage from "@/pages/EquipmentPage";
 import DoctorsPage from "@/pages/DoctorsPage";
 import MapPage from "@/pages/MapPage";
 import AnalyticsPage from "@/pages/AnalyticsPage";
+import PatientDashboard from "@/pages/PatientDashboard";
+import ProfilePage from "@/pages/ProfilePage";
+import PatientRecordsPage from "@/pages/PatientRecordsPage";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -31,7 +35,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={user?.role === 'patient' ? <PatientDashboard /> : <DashboardPage />} />
         <Route path="/emergency" element={<EmergencyPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/sharing" element={<SharingPage />} />
@@ -39,6 +43,8 @@ function AppRoutes() {
         <Route path="/doctors" element={<DoctorsPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/patient-records" element={<PatientRecordsPage />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
@@ -50,11 +56,13 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <AuthProvider>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </AuthProvider>
+      <I18nProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </AuthProvider>
+      </I18nProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
