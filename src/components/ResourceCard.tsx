@@ -13,25 +13,33 @@ export default function ResourceCard({ icon: Icon, label, available, total, comp
   const status = pct >= 90 ? 'critical' : pct >= 70 ? 'warning' : 'success';
 
   const barColor = {
-    critical: 'bg-critical',
+    critical: 'bg-destructive',
     warning: 'bg-warning',
     success: 'bg-success',
   }[status];
 
+  const iconColor = {
+    critical: 'text-destructive',
+    warning: 'text-warning',
+    success: 'text-success',
+  }[status];
+
   return (
-    <div className={cn('bg-card border border-border rounded-lg', compact ? 'p-3' : 'p-4')}>
-      <div className="flex items-center gap-2 mb-2">
-        <Icon className={cn('w-4 h-4', status === 'critical' ? 'text-critical' : status === 'warning' ? 'text-warning' : 'text-success')} />
-        <span className="text-xs text-muted-foreground uppercase tracking-wider">{label}</span>
+    <div className={cn('bg-card border border-border rounded-xl shadow-sm', compact ? 'p-3' : 'p-5')}>
+      <div className="flex items-center gap-2 mb-3">
+        <div className={cn('w-8 h-8 rounded-lg flex items-center justify-center', status === 'critical' ? 'bg-destructive/10' : status === 'warning' ? 'bg-warning/10' : 'bg-success/10')}>
+          <Icon className={cn('w-4 h-4', iconColor)} />
+        </div>
+        <span className="text-xs text-muted-foreground font-medium">{label}</span>
       </div>
-      <div className="flex items-baseline gap-1 mb-2">
-        <span className="text-2xl font-semibold text-foreground">{available}</span>
-        <span className="text-xs text-muted-foreground">/ {total}</span>
+      <div className="flex items-baseline gap-1 mb-3">
+        <span className="text-2xl font-bold text-foreground">{available}</span>
+        <span className="text-sm text-muted-foreground">/ {total}</span>
       </div>
-      <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+      <div className="h-2 bg-muted rounded-full overflow-hidden">
         <div className={cn('h-full rounded-full transition-all', barColor)} style={{ width: `${pct}%` }} />
       </div>
-      <span className="text-[10px] text-muted-foreground mt-1 block">{pct.toFixed(0)}% utilized</span>
+      <span className="text-[10px] text-muted-foreground mt-1.5 block">{pct.toFixed(0)}% utilized</span>
     </div>
   );
 }

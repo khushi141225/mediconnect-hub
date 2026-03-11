@@ -7,6 +7,7 @@ interface AuthUser {
   role: UserRole;
   hospital?: string;
   hospitalId?: string;
+  patientId?: string;
 }
 
 interface AuthContextType {
@@ -21,6 +22,7 @@ const mockUsers: Record<UserRole, AuthUser> = {
   hospital_admin: { id: 'u1', name: 'Admin Sharma', role: 'hospital_admin', hospital: 'City General Hospital', hospitalId: 'h1' },
   ambulance_coordinator: { id: 'u2', name: 'Coord. Patel', role: 'ambulance_coordinator' },
   doctor: { id: 'u3', name: 'Dr. Priya Menon', role: 'doctor', hospital: 'National Trauma Center', hospitalId: 'h5' },
+  patient: { id: 'u4', name: 'Rahul Kumar', role: 'patient', patientId: 'P-2024-001' },
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {

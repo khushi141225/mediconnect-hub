@@ -1,6 +1,4 @@
-// Mock data for MediSync prototype
-
-export type UserRole = 'hospital_admin' | 'ambulance_coordinator' | 'doctor';
+export type UserRole = 'hospital_admin' | 'ambulance_coordinator' | 'doctor' | 'patient';
 
 export interface Hospital {
   id: string;
@@ -22,11 +20,14 @@ export interface Doctor {
   id: string;
   name: string;
   specialty: string;
+  degree: string;
+  experience: number;
   hospital: string;
   hospitalId: string;
   available: boolean;
   consultationMode: 'in-person' | 'telemedicine' | 'both';
   avatar?: string;
+  freeSlots: string[];
 }
 
 export interface ResourceRequest {
@@ -57,6 +58,21 @@ export interface EmergencyCase {
   status: 'scanning' | 'assigned' | 'in_transit' | 'arrived';
   assignedHospital?: string;
   decision?: 'treat' | 'request_resources' | 'transfer';
+}
+
+export interface PatientRecord {
+  id: string;
+  patientId: string;
+  patientName: string;
+  age: number;
+  gender: string;
+  bloodGroup: string;
+  conditions: string[];
+  hospitalVisits: { hospital: string; date: string; doctor: string; diagnosis: string }[];
+  prescriptions: { medicine: string; dosage: string; date: string }[];
+  labReports: { test: string; result: string; date: string; hospital: string }[];
+  weightRecords: { weight: number; date: string }[];
+  hemoglobinRecords: { value: number; date: string }[];
 }
 
 export const hospitals: Hospital[] = [
@@ -113,14 +129,14 @@ export const hospitals: Hospital[] = [
 ];
 
 export const doctors: Doctor[] = [
-  { id: 'd1', name: 'Dr. Aanya Sharma', specialty: 'Cardiologist', hospital: 'City General Hospital', hospitalId: 'h1', available: true, consultationMode: 'both' },
-  { id: 'd2', name: 'Dr. Rajesh Patel', specialty: 'Neurosurgeon', hospital: 'Metro Private Medical Center', hospitalId: 'h2', available: false, consultationMode: 'in-person' },
-  { id: 'd3', name: 'Dr. Priya Menon', specialty: 'Trauma Surgeon', hospital: 'National Trauma Center', hospitalId: 'h5', available: true, consultationMode: 'both' },
-  { id: 'd4', name: 'Dr. Vikram Singh', specialty: 'Pulmonologist', hospital: 'Sunrise Multispecialty Hospital', hospitalId: 'h4', available: true, consultationMode: 'telemedicine' },
-  { id: 'd5', name: 'Dr. Fatima Khan', specialty: 'Anesthesiologist', hospital: 'City General Hospital', hospitalId: 'h1', available: true, consultationMode: 'in-person' },
-  { id: 'd6', name: 'Dr. Arjun Reddy', specialty: 'Orthopedic Surgeon', hospital: 'District Public Hospital', hospitalId: 'h3', available: false, consultationMode: 'both' },
-  { id: 'd7', name: 'Dr. Sneha Iyer', specialty: 'Emergency Medicine', hospital: 'National Trauma Center', hospitalId: 'h5', available: true, consultationMode: 'both' },
-  { id: 'd8', name: 'Dr. Mohammed Ali', specialty: 'Cardiologist', hospital: 'Sunrise Multispecialty Hospital', hospitalId: 'h4', available: true, consultationMode: 'telemedicine' },
+  { id: 'd1', name: 'Dr. Aanya Sharma', specialty: 'Cardiologist', degree: 'MBBS, MD (Cardiology)', experience: 12, hospital: 'City General Hospital', hospitalId: 'h1', available: true, consultationMode: 'both', freeSlots: ['10:00 AM', '2:00 PM', '4:30 PM'] },
+  { id: 'd2', name: 'Dr. Rajesh Patel', specialty: 'Neurosurgeon', degree: 'MBBS, MS, MCh (Neuro)', experience: 18, hospital: 'Metro Private Medical Center', hospitalId: 'h2', available: false, consultationMode: 'in-person', freeSlots: [] },
+  { id: 'd3', name: 'Dr. Priya Menon', specialty: 'Trauma Surgeon', degree: 'MBBS, MS (Surgery)', experience: 15, hospital: 'National Trauma Center', hospitalId: 'h5', available: true, consultationMode: 'both', freeSlots: ['9:00 AM', '11:30 AM'] },
+  { id: 'd4', name: 'Dr. Vikram Singh', specialty: 'Pulmonologist', degree: 'MBBS, MD (Pulmonology)', experience: 10, hospital: 'Sunrise Multispecialty Hospital', hospitalId: 'h4', available: true, consultationMode: 'telemedicine', freeSlots: ['1:00 PM', '3:00 PM', '5:00 PM'] },
+  { id: 'd5', name: 'Dr. Fatima Khan', specialty: 'Anesthesiologist', degree: 'MBBS, MD (Anesthesia)', experience: 8, hospital: 'City General Hospital', hospitalId: 'h1', available: true, consultationMode: 'in-person', freeSlots: ['8:00 AM', '12:00 PM'] },
+  { id: 'd6', name: 'Dr. Arjun Reddy', specialty: 'Orthopedic Surgeon', degree: 'MBBS, MS (Ortho)', experience: 14, hospital: 'District Public Hospital', hospitalId: 'h3', available: false, consultationMode: 'both', freeSlots: [] },
+  { id: 'd7', name: 'Dr. Sneha Iyer', specialty: 'Emergency Medicine', degree: 'MBBS, MD (EM)', experience: 7, hospital: 'National Trauma Center', hospitalId: 'h5', available: true, consultationMode: 'both', freeSlots: ['10:00 AM', '2:00 PM'] },
+  { id: 'd8', name: 'Dr. Mohammed Ali', specialty: 'Cardiologist', degree: 'MBBS, DM (Cardiology)', experience: 20, hospital: 'Sunrise Multispecialty Hospital', hospitalId: 'h4', available: true, consultationMode: 'telemedicine', freeSlots: ['9:00 AM', '11:00 AM', '3:00 PM'] },
 ];
 
 export const resourceRequests: ResourceRequest[] = [
@@ -141,6 +157,66 @@ export const notifications: Notification[] = [
 
 export const emergencyTypes = [
   'Cardiac Arrest', 'Stroke', 'Trauma', 'Accident', 'Burns', 'Respiratory Failure', 'Poisoning', 'Obstetric Emergency',
+];
+
+export const patientRecords: PatientRecord[] = [
+  {
+    id: 'pr1',
+    patientId: 'P-2024-001',
+    patientName: 'Rahul Kumar',
+    age: 34,
+    gender: 'Male',
+    bloodGroup: 'B+',
+    conditions: ['Hypertension', 'Type 2 Diabetes'],
+    hospitalVisits: [
+      { hospital: 'City General Hospital', date: '2024-01-15', doctor: 'Dr. Aanya Sharma', diagnosis: 'Chest pain evaluation' },
+      { hospital: 'Metro Private Medical Center', date: '2023-11-20', doctor: 'Dr. Rajesh Patel', diagnosis: 'Migraine assessment' },
+      { hospital: 'City General Hospital', date: '2023-08-05', doctor: 'Dr. Aanya Sharma', diagnosis: 'Routine cardiac checkup' },
+    ],
+    prescriptions: [
+      { medicine: 'Metformin 500mg', dosage: 'Twice daily', date: '2024-01-15' },
+      { medicine: 'Amlodipine 5mg', dosage: 'Once daily', date: '2024-01-15' },
+      { medicine: 'Sumatriptan 50mg', dosage: 'As needed', date: '2023-11-20' },
+    ],
+    labReports: [
+      { test: 'HbA1c', result: '7.2%', date: '2024-01-15', hospital: 'City General Hospital' },
+      { test: 'Lipid Profile', result: 'LDL: 142 mg/dL', date: '2024-01-15', hospital: 'City General Hospital' },
+      { test: 'ECG', result: 'Normal Sinus Rhythm', date: '2023-08-05', hospital: 'City General Hospital' },
+    ],
+    weightRecords: [
+      { weight: 82, date: '2024-01-15' }, { weight: 80, date: '2023-11-20' }, { weight: 78, date: '2023-08-05' },
+    ],
+    hemoglobinRecords: [
+      { value: 14.2, date: '2024-01-15' }, { value: 13.8, date: '2023-11-20' }, { value: 14.0, date: '2023-08-05' },
+    ],
+  },
+  {
+    id: 'pr2',
+    patientId: 'P-2024-002',
+    patientName: 'Sneha Gupta',
+    age: 28,
+    gender: 'Female',
+    bloodGroup: 'O+',
+    conditions: ['Asthma'],
+    hospitalVisits: [
+      { hospital: 'Sunrise Multispecialty Hospital', date: '2024-02-10', doctor: 'Dr. Vikram Singh', diagnosis: 'Acute asthma exacerbation' },
+      { hospital: 'District Public Hospital', date: '2023-09-15', doctor: 'Dr. Arjun Reddy', diagnosis: 'Knee pain evaluation' },
+    ],
+    prescriptions: [
+      { medicine: 'Salbutamol Inhaler', dosage: 'As needed', date: '2024-02-10' },
+      { medicine: 'Fluticasone Inhaler', dosage: 'Twice daily', date: '2024-02-10' },
+    ],
+    labReports: [
+      { test: 'Spirometry', result: 'FEV1: 72%', date: '2024-02-10', hospital: 'Sunrise Multispecialty Hospital' },
+      { test: 'X-Ray Knee', result: 'No fracture', date: '2023-09-15', hospital: 'District Public Hospital' },
+    ],
+    weightRecords: [
+      { weight: 58, date: '2024-02-10' }, { weight: 57, date: '2023-09-15' },
+    ],
+    hemoglobinRecords: [
+      { value: 12.5, date: '2024-02-10' }, { value: 12.2, date: '2023-09-15' },
+    ],
+  },
 ];
 
 export const analyticsData = {
@@ -168,5 +244,16 @@ export const analyticsData = {
     { name: 'General Beds', used: 836, total: 1000 },
     { name: 'Op. Theatres', used: 29, total: 40 },
     { name: 'Ambulances', used: 44, total: 61 },
+  ],
+  appointmentStats: [
+    { day: 'Mon', count: 45 }, { day: 'Tue', count: 52 }, { day: 'Wed', count: 48 },
+    { day: 'Thu', count: 61 }, { day: 'Fri', count: 55 }, { day: 'Sat', count: 38 },
+    { day: 'Sun', count: 22 },
+  ],
+  doctorSchedule: [
+    { hour: '8AM', patients: 3 }, { hour: '9AM', patients: 5 }, { hour: '10AM', patients: 4 },
+    { hour: '11AM', patients: 6 }, { hour: '12PM', patients: 2 }, { hour: '1PM', patients: 0 },
+    { hour: '2PM', patients: 4 }, { hour: '3PM', patients: 5 }, { hour: '4PM', patients: 3 },
+    { hour: '5PM', patients: 2 },
   ],
 };
