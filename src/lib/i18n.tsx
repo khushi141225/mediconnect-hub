@@ -248,6 +248,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'वेळ',
     approve: 'मंजूर',
     reject: 'नाकारा',
+    gov_authority: 'सरकारी प्राधिकरण',
+    gov_authority_desc: 'रुग्णालये, अनुपालन आणि आरोग्य देखरेख निरीक्षण करा.',
+    gov_dashboard: 'सरकारी डॅशबोर्ड',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ',
