@@ -165,6 +165,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'समय',
     approve: 'स्वीकृत करें',
     reject: 'अस्वीकृत करें',
+    gov_authority: 'सरकारी प्राधिकरण',
+    gov_authority_desc: 'अस्पतालों, अनुपालन और स्वास्थ्य निगरानी की देखरेख करें।',
+    gov_dashboard: 'सरकारी डैशबोर्ड',
   },
   mr: {
     dashboard: 'डॅशबोर्ड',
