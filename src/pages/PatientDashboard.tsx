@@ -28,6 +28,7 @@ const quickActions = [
 export default function PatientDashboard() {
   const { user } = useAuth();
   const { t } = useI18n();
+  const navigate = useNavigate();
   const record = patientRecords.find(r => r.patientId === user?.patientId);
 
   return (
