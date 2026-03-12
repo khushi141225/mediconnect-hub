@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth-context';
 import { useI18n } from '@/lib/i18n';
 import { patientRecords } from '@/lib/mock-data';
@@ -7,14 +8,14 @@ import {
 } from 'lucide-react';
 
 const serviceCards = [
-  { icon: Heart, labelKey: 'healthy_bytes', color: 'from-pink-500 to-rose-400', desc: 'Health tips & wellness' },
-  { icon: FlaskConical, labelKey: 'lab_tests', color: 'from-blue-500 to-cyan-400', desc: 'Book & view lab tests' },
-  { icon: Pill, labelKey: 'medicines', color: 'from-green-500 to-emerald-400', desc: 'Order medicines online' },
-  { icon: Video, labelKey: 'teleconsultation', color: 'from-purple-500 to-violet-400', desc: 'Video consult with doctors' },
-  { icon: Calendar, labelKey: 'appointments', color: 'from-orange-500 to-amber-400', desc: 'Get appointment tokens' },
-  { icon: FileText, labelKey: 'health_records', color: 'from-teal-500 to-cyan-400', desc: 'View medical history' },
-  { icon: Fingerprint, labelKey: 'digital_health_id', color: 'from-indigo-500 to-blue-400', desc: 'Your unique health ID' },
-  { icon: Stethoscope, labelKey: 'health_services', color: 'from-red-500 to-pink-400', desc: 'Other health services' },
+  { icon: Heart, labelKey: 'healthy_bytes', color: 'from-pink-500 to-rose-400', desc: 'Health tips & wellness', path: '/healthy-bytes' },
+  { icon: FlaskConical, labelKey: 'lab_tests', color: 'from-blue-500 to-cyan-400', desc: 'Book & view lab tests', path: '/lab-tests' },
+  { icon: Pill, labelKey: 'medicines', color: 'from-green-500 to-emerald-400', desc: 'Order medicines online', path: '/medicines' },
+  { icon: Video, labelKey: 'teleconsultation', color: 'from-purple-500 to-violet-400', desc: 'Video consult with doctors', path: '/teleconsultation' },
+  { icon: Calendar, labelKey: 'appointments', color: 'from-orange-500 to-amber-400', desc: 'Get appointment tokens', path: '/appointments' },
+  { icon: FileText, labelKey: 'health_records', color: 'from-teal-500 to-cyan-400', desc: 'View medical history', path: '/health-records' },
+  { icon: Fingerprint, labelKey: 'digital_health_id', color: 'from-indigo-500 to-blue-400', desc: 'Your unique health ID', path: '/digital-health-id' },
+  { icon: Stethoscope, labelKey: 'health_services', color: 'from-red-500 to-pink-400', desc: 'Other health services', path: '/health-services' },
 ];
 
 const quickActions = [
