@@ -6,7 +6,7 @@ import { useI18n } from '@/lib/i18n';
 import {
   LayoutDashboard, Ambulance, Users, Package, ArrowLeftRight,
   BarChart3, Map, AlertTriangle, LogOut, Stethoscope, Activity,
-  Heart, FileText, User
+  Heart, FileText, User, Shield
 } from 'lucide-react';
 
 interface NavItem {
