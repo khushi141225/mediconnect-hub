@@ -23,6 +23,7 @@ const mockUsers: Record<UserRole, AuthUser> = {
   ambulance_coordinator: { id: 'u2', name: 'Coord. Patel', role: 'ambulance_coordinator' },
   doctor: { id: 'u3', name: 'Dr. Priya Menon', role: 'doctor', hospital: 'National Trauma Center', hospitalId: 'h5' },
   patient: { id: 'u4', name: 'Rahul Kumar', role: 'patient', patientId: 'P-2024-001' },
+  gov_authority: { id: 'u5', name: 'Dir. Verma', role: 'gov_authority' },
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {

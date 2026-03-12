@@ -6,7 +6,7 @@ import { useI18n } from '@/lib/i18n';
 import {
   LayoutDashboard, Ambulance, Users, Package, ArrowLeftRight,
   BarChart3, Map, AlertTriangle, LogOut, Stethoscope, Activity,
-  Heart, FileText, User
+  Heart, FileText, User, Shield
 } from 'lucide-react';
 
 interface NavItem {
@@ -17,7 +17,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: LayoutDashboard, labelKey: 'dashboard', path: '/dashboard', roles: ['hospital_admin', 'ambulance_coordinator', 'doctor', 'patient'] },
+  { icon: LayoutDashboard, labelKey: 'dashboard', path: '/dashboard', roles: ['hospital_admin', 'ambulance_coordinator', 'doctor', 'patient', 'gov_authority'] },
   { icon: Ambulance, labelKey: 'emergency', path: '/emergency', roles: ['ambulance_coordinator', 'hospital_admin'] },
   { icon: Package, labelKey: 'resources', path: '/resources', roles: ['hospital_admin'] },
   { icon: ArrowLeftRight, labelKey: 'sharing', path: '/sharing', roles: ['hospital_admin'] },
@@ -25,8 +25,9 @@ const navItems: NavItem[] = [
   { icon: Stethoscope, labelKey: 'doctors', path: '/doctors', roles: ['hospital_admin', 'doctor', 'ambulance_coordinator'] },
   { icon: FileText, labelKey: 'patient_records', path: '/patient-records', roles: ['hospital_admin', 'doctor'] },
   { icon: Map, labelKey: 'map', path: '/map', roles: ['hospital_admin', 'ambulance_coordinator', 'patient'] },
-  { icon: BarChart3, labelKey: 'analytics', path: '/analytics', roles: ['hospital_admin', 'doctor'] },
-  { icon: User, labelKey: 'profile', path: '/profile', roles: ['hospital_admin', 'ambulance_coordinator', 'doctor', 'patient'] },
+  { icon: BarChart3, labelKey: 'analytics', path: '/analytics', roles: ['hospital_admin', 'doctor', 'gov_authority'] },
+  { icon: Shield, labelKey: 'gov_dashboard', path: '/gov-dashboard', roles: ['gov_authority'] },
+  { icon: User, labelKey: 'profile', path: '/profile', roles: ['hospital_admin', 'ambulance_coordinator', 'doctor', 'patient', 'gov_authority'] },
 ];
 
 export default function NavRail() {

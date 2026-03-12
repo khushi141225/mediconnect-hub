@@ -1,4 +1,4 @@
-export type UserRole = 'hospital_admin' | 'ambulance_coordinator' | 'doctor' | 'patient';
+export type UserRole = 'hospital_admin' | 'ambulance_coordinator' | 'doctor' | 'patient' | 'gov_authority';
 
 export interface Hospital {
   id: string;

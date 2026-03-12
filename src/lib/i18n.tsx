@@ -82,6 +82,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'Time',
     approve: 'Approve',
     reject: 'Reject',
+    gov_authority: 'Government Authority',
+    gov_authority_desc: 'Monitor hospitals, compliance & healthcare oversight.',
+    gov_dashboard: 'Gov Dashboard',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -162,6 +165,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'समय',
     approve: 'स्वीकृत करें',
     reject: 'अस्वीकृत करें',
+    gov_authority: 'सरकारी प्राधिकरण',
+    gov_authority_desc: 'अस्पतालों, अनुपालन और स्वास्थ्य निगरानी की देखरेख करें।',
+    gov_dashboard: 'सरकारी डैशबोर्ड',
   },
   mr: {
     dashboard: 'डॅशबोर्ड',
@@ -242,6 +248,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'वेळ',
     approve: 'मंजूर',
     reject: 'नाकारा',
+    gov_authority: 'सरकारी प्राधिकरण',
+    gov_authority_desc: 'रुग्णालये, अनुपालन आणि आरोग्य देखरेख निरीक्षण करा.',
+    gov_dashboard: 'सरकारी डॅशबोर्ड',
   },
   gu: {
     dashboard: 'ડેશબોર્ડ',
@@ -322,6 +331,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'સમય',
     approve: 'મંજૂર',
     reject: 'નકારો',
+    gov_authority: 'સરકારી સત્તામંડળ',
+    gov_authority_desc: 'હોસ્પિટલો, અનુપાલન અને આરોગ્ય દેખરેખ મોનિટર કરો.',
+    gov_dashboard: 'સરકારી ડેશબોર્ડ',
   },
 };
 

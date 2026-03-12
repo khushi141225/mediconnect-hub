@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { I18nProvider } from "@/lib/i18n";
 import AppLayout from "@/components/layout/AppLayout";
+import FloatingEmergencyPanel from "@/components/FloatingEmergencyPanel";
+import AIChatbot from "@/components/AIChatbot";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import EmergencyPage from "@/pages/EmergencyPage";
@@ -18,6 +20,15 @@ import AnalyticsPage from "@/pages/AnalyticsPage";
 import PatientDashboard from "@/pages/PatientDashboard";
 import ProfilePage from "@/pages/ProfilePage";
 import PatientRecordsPage from "@/pages/PatientRecordsPage";
+import GovernmentDashboard from "@/pages/GovernmentDashboard";
+import HealthyBytesPage from "@/pages/HealthyBytesPage";
+import LabTestsPage from "@/pages/LabTestsPage";
+import MedicinesPage from "@/pages/MedicinesPage";
+import TeleconsultationPage from "@/pages/TeleconsultationPage";
+import AppointmentsPage from "@/pages/AppointmentsPage";
+import HealthRecordsPage from "@/pages/HealthRecordsPage";
+import DigitalHealthIDPage from "@/pages/DigitalHealthIDPage";
+import HealthServicesPage from "@/pages/HealthServicesPage";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -31,23 +42,43 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   const { user } = useAuth();
 
+  const getDashboard = () => {
+    if (!user) return <DashboardPage />;
+    if (user.role === 'patient') return <PatientDashboard />;
+    if (user.role === 'gov_authority') return <GovernmentDashboard />;
+    return <DashboardPage />;
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
-      <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
-        <Route path="/dashboard" element={user?.role === 'patient' ? <PatientDashboard /> : <DashboardPage />} />
-        <Route path="/emergency" element={<EmergencyPage />} />
-        <Route path="/resources" element={<ResourcesPage />} />
-        <Route path="/sharing" element={<SharingPage />} />
-        <Route path="/equipment" element={<EquipmentPage />} />
-        <Route path="/doctors" element={<DoctorsPage />} />
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/patient-records" element={<PatientRecordsPage />} />
-      </Route>
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
+        <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
+          <Route path="/dashboard" element={getDashboard()} />
+          <Route path="/emergency" element={<EmergencyPage />} />
+          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/sharing" element={<SharingPage />} />
+          <Route path="/equipment" element={<EquipmentPage />} />
+          <Route path="/doctors" element={<DoctorsPage />} />
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/patient-records" element={<PatientRecordsPage />} />
+          <Route path="/gov-dashboard" element={<GovernmentDashboard />} />
+          <Route path="/healthy-bytes" element={<HealthyBytesPage />} />
+          <Route path="/lab-tests" element={<LabTestsPage />} />
+          <Route path="/medicines" element={<MedicinesPage />} />
+          <Route path="/teleconsultation" element={<TeleconsultationPage />} />
+          <Route path="/appointments" element={<AppointmentsPage />} />
+          <Route path="/health-records" element={<HealthRecordsPage />} />
+          <Route path="/digital-health-id" element={<DigitalHealthIDPage />} />
+          <Route path="/health-services" element={<HealthServicesPage />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      {user && <FloatingEmergencyPanel />}
+      {user && <AIChatbot />}
+    </>
   );
 }
 
