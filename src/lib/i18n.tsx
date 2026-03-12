@@ -82,6 +82,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'Time',
     approve: 'Approve',
     reject: 'Reject',
+    gov_authority: 'Government Authority',
+    gov_authority_desc: 'Monitor hospitals, compliance & healthcare oversight.',
+    gov_dashboard: 'Gov Dashboard',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
