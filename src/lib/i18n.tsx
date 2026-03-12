@@ -331,6 +331,9 @@ const translations: Record<Language, Record<string, string>> = {
     time: 'સમય',
     approve: 'મંજૂર',
     reject: 'નકારો',
+    gov_authority: 'સરકારી સત્તામંડળ',
+    gov_authority_desc: 'હોસ્પિટલો, અનુપાલન અને આરોગ્ય દેખરેખ મોનિટર કરો.',
+    gov_dashboard: 'સરકારી ડેશબોર્ડ',
   },
 };
 
