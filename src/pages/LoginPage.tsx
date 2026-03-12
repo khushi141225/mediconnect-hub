@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth-context';
 import { useI18n } from '@/lib/i18n';
 import { motion } from 'framer-motion';
-import { Activity, Building2, Ambulance, Stethoscope, Heart, Globe, Mail, Phone, Chrome } from 'lucide-react';
+import { Activity, Building2, Ambulance, Stethoscope, Heart, Globe, Mail, Phone, Chrome, Shield } from 'lucide-react';
 import type { UserRole } from '@/lib/mock-data';
 
 const roles: { role: UserRole; icon: React.ElementType; color: string }[] = [
@@ -11,6 +11,7 @@ const roles: { role: UserRole; icon: React.ElementType; color: string }[] = [
   { role: 'ambulance_coordinator', icon: Ambulance, color: 'from-destructive to-destructive/80' },
   { role: 'doctor', icon: Stethoscope, color: 'from-success to-success/80' },
   { role: 'patient', icon: Heart, color: 'from-warning to-warning/80' },
+  { role: 'gov_authority', icon: Shield, color: 'from-indigo-600 to-blue-500' },
 ];
 
 type LoginMethod = 'email' | 'phone' | 'google';
