@@ -69,7 +69,7 @@ export default function LoginPage() {
           </div>
 
           {/* Role cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
             {roles.map((r, i) => (
               <motion.button
                 key={r.role}
