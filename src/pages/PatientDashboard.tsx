@@ -55,7 +55,7 @@ export default function PatientDashboard() {
       <h2 className="font-display text-lg font-semibold mb-4">{t('health_services')}</h2>
       <div className="grid grid-cols-4 gap-4 mb-8">
         {serviceCards.map((s, i) => (
-          <div key={i} className="service-card text-center">
+          <div key={i} onClick={() => navigate(s.path)} className="service-card text-center cursor-pointer">
             <div className={`w-14 h-14 mx-auto rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-3`}>
               <s.icon className="w-7 h-7 text-primary-foreground" />
             </div>
